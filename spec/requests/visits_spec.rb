@@ -3,14 +3,16 @@ require 'rails_helper'
 
 RSpec.describe "/visits", type: :request do
 
-
   let!(:user5) {FactoryBot.create(:user, nome: 'David5', password: '123456789', email: 'davidese3@gmail.com', cpf: '352.418.274-71')}
-  let!(:visit1) {FactoryBot.create(:visit, data: "2023-10-12", status: "pendente", checkin_at: "nil", checkout_at: "nil", user_id: user5.id)}
-  let!(:visit2) {FactoryBot.create(:visit, data: "2023-09-10", status: "pendente", checkin_at: "nil", checkout_at: "nil", user_id: user5.id)}
-
+  #Autenticando token no sistema
   before do  
     allow(AuthenticationTokenService).to receive(:decode).and_return(user5.cpf + " - " + user5.email)
   end
+
+  let!(:visit1) {FactoryBot.create(:visit, data: "2023-10-12", status: "pendente", checkin_at: "nil", checkout_at: "nil", user_id: user5.id)}
+  let!(:visit2) {FactoryBot.create(:visit, data: "2023-09-10", status: "pendente", checkin_at: "nil", checkout_at: "nil", user_id: user5.id)}
+  
+  
 
   describe "GET /visits" do
     it 'listar visitas' do

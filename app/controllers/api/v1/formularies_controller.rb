@@ -40,6 +40,8 @@ module Api
       # DELETE /formularies/1
       def destroy
         @formulary.destroy
+
+        head :no_content
       end
 
       private

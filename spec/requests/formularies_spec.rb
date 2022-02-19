@@ -3,18 +3,20 @@ require 'rails_helper'
 
 
 RSpec.describe "/formularies", type: :request do
+  #Autenticando token no sistema
   let!(:user5) {FactoryBot.create(:user, nome: 'David5', password: '123456789', email: 'davidese3@gmail.com', cpf: '352.418.274-71')}
+  before do  
+    allow(AuthenticationTokenService).to receive(:decode).and_return(user5.cpf + " - " + user5.email)
+  end
 
   let!(:form1) {FactoryBot.create(:formulary, nome:"pesquisa1")}
   let!(:form2) {FactoryBot.create(:formulary, nome:"pesquisa2")}
 
   let!(:pergunta1) {FactoryBot.create(:question, nome:"pergunta1", tipo_de_questao:"foto", formulary_id:form1.id)}
 
-  let!(:pergunta2) {FactoryBot.create(:question, nome:"pergunta1", tipo_de_questao:"foto", formulary_id:form1.id)}
+  let!(:pergunta2) {FactoryBot.create(:question, nome:"pergunta2", tipo_de_questao:"foto", formulary_id:form1.id)}
 
-  before do  
-    allow(AuthenticationTokenService).to receive(:decode).and_return(user5.cpf + " - " + user5.email)
-  end
+  
 
   describe "GET /formularies" do
     it 'listar formulários' do
