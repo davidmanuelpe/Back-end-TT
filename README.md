@@ -10,7 +10,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] desenvolvimento da autenticação do usuário
 - [x] desenvolvimento da entidade Visitas
 - [x] desenvolvimento da entidade Formulário
-- [ ] desenvolvimento da entidade Pergunta
+- [x] desenvolvimento da entidade Pergunta
 - [ ] desenvolvimento da entidade Resposta
 
 ## 💻 Pré-requisitos
@@ -88,11 +88,15 @@ curl --header "Authorization: Bearer JWT_token" -X GET http://localhost:3000/api
 curl --header "Authorization: Bearer JWT_token" --header "Content-Type: application/json" --request PUT --data '{"visit": { "data": nova_data "status": novo_status, "checkin_at": novo_checkin, "checkout_at": novo_checkout } }' http://localhost:3000/api/v1/visits/visit_id -v
 ```
 
+* Atenção, lembrar de substituir o visit_id na url
+
 9. remover visita?
 
 ```
 curl --header "Authorization: Bearer JWT_token" --header "Content-Type: application/json" --request DELETE http://localhost:3000/api/v1/visits/visit_id -v
 ```
+
+* Atenção, lembrar de substituir o visit_id na url
 
 ## Funcionalidades de Formulário
 
@@ -114,11 +118,45 @@ curl --header "Authorization: Bearer JWT_token" --header "Content-Type: applicat
 curl --header "Authorization: Bearer JWT_token" --header "Content-Type: application/json" --request PUT --data '{"formulary": {"nome": "novo_nome"} }' http://localhost:3000/api/v1/formularies/formulary_id -v
 ```
 
+* Atenção, lembrar de substituir o formulary_id na url
+
 13. deletar formulário:
 
 ```
 curl --header "Authorization: Bearer JWT_token" --header "Content-Type: application/json" --request DELETE http://localhost:3000/api/v1/formularies/ formulary_id -v
 ```
+
+* Atenção, lembrar de substituir o formulary_id na url
+
+## Funcionalidades de Perguntas
+
+14. listar perguntas:
+
+```
+curl --header "Authorization: Bearer JWT_token" --request GET http://localhost:3000/api/v1/questions -v
+```
+
+15. criar perguntas:
+
+```
+curl --header "Authorization: Bearer JWT_toke" --header "Content-Type: application/json" --request POST --data '{ "question": { "nome": nome_pergunta, "tipo_de_questao": tipo_pergunta, "formulary_id": formulary_id } }' http://localhost:3000/api/v1/questions -v
+```
+
+16. editar perguntas:
+
+```
+curl --header "Authorization: Bearer token" --header "Content-Type: application/json" --request PUT --data '{"question": { "nome": nome_novo, "tipo_pergunta": tipo_novo } }' http://localhost:3000/api/v1/questions/ question_id -v
+```
+
+* Atenção, lembrar de substituir o question_id na url
+
+17. deletar perguntas:
+
+```
+curl --header "Authorization: Bearer token" --header "Content-Type: application/json" --request DELETE http://localhost:3000/api/v1/questions/ question_id -v
+```
+
+* Atenção, lembrar de substituir o question_id na url
 
 
 
