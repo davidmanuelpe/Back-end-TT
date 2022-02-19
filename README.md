@@ -9,7 +9,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] desenvolvimento da entidade Usuário (com testes)
 - [x] desenvolvimento da autenticação do usuário
 - [x] desenvolvimento da entidade Visitas
-- [ ] desenvolvimento da entidade Formulário
+- [x] desenvolvimento da entidade Formulário
 - [ ] desenvolvimento da entidade Pergunta
 - [ ] desenvolvimento da entidade Resposta
 
