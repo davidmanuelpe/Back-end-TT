@@ -2,16 +2,17 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
 
-
-  FactoryBot.create(:user, nome: 'David', password: '12345678', email: 'david@gmail.com', cpf: '667.579.778-69')
-  FactoryBot.create(:user, nome: 'David2', password: '12345678', email: 'davide@gmail.com', cpf: '427.223.514-12')
-  FactoryBot.create(:user, nome: 'David4', password: '123456789', email: 'davidese@gmail.com', cpf: '549.371.584-81')
+  #Autenticando token no sistema
   let!(:user4) {FactoryBot.create(:user, nome: 'David5', password: '123456789', email: 'davidese2@gmail.com', cpf: '785.888.657-69')}
-
   before do  
     allow(AuthenticationTokenService).to receive(:decode).and_return(user4.cpf + " - " + user4.email)
   end
 
+  FactoryBot.create(:user, nome: 'David', password: '12345678', email: 'david@gmail.com', cpf: '667.579.778-69')
+  FactoryBot.create(:user, nome: 'David2', password: '12345678', email: 'davide@gmail.com', cpf: '427.223.514-12')
+  FactoryBot.create(:user, nome: 'David4', password: '123456789', email: 'davidese@gmail.com', cpf: '549.371.584-81')
+
+  
   describe "GET /users" do
     it 'listar usuários' do
       get '/api/v1/users'
