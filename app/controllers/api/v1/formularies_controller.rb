@@ -9,7 +9,7 @@ module Api
       def index
         @formularies = Formulary.limit(limit).offset(params[:offset])
 
-        render json: @formularies
+        render json: FormulariesRepresenter.new(@formularies).as_json
       end
 
       # GET /formularies/1
@@ -22,7 +22,7 @@ module Api
         @formulary = Formulary.new(formulary_params)
 
         if @formulary.save
-          render json: @formulary, status: :created, location: @formulary
+          render json: FormularyRepresenter.new(@formulary).as_json, status: :created
         else
           render json: @formulary.errors, status: :unprocessable_entity
         end
@@ -31,7 +31,7 @@ module Api
       # PATCH/PUT /formularies/1
       def update
         if @formulary.update(formulary_params)
-          render json: @formulary
+          render json: FormularyRepresenter.new(@formulary).as_json, status: :accepted
         else
           render json: @formulary.errors, status: :unprocessable_entity
         end
