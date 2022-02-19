@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_19_064358) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_19_104513) do
   create_table "users", force: :cascade do |t|
     t.string "nome"
     t.string "email"
@@ -22,4 +22,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_19_064358) do
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
   end
 
+  create_table "visits", force: :cascade do |t|
+    t.date "data"
+    t.string "status"
+    t.datetime "checkin_at"
+    t.datetime "checkout_at"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_visits_on_deleted_at"
+    t.index ["user_id"], name: "index_visits_on_user_id"
+  end
+
+  add_foreign_key "visits", "users"
 end

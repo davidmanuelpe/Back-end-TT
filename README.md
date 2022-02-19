@@ -8,7 +8,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 - [x] desenvolvimento da entidade Usuário (com testes)
 - [x] desenvolvimento da autenticação do usuário
-- [ ] desenvolvimento da entidade Visitas
+- [x] desenvolvimento da entidade Visitas
 - [ ] desenvolvimento da entidade Formulário
 - [ ] desenvolvimento da entidade Pergunta
 - [ ] desenvolvimento da entidade Resposta
@@ -26,7 +26,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 Para usar Back-End-TT, siga estas etapas:
 
-* A primeira etapa para o uso do sistema é cadastrar-se no sistema e após se autenticar
+* A primeira etapa para o uso do sistema é cadastrar-se no sistema e então, se autenticar.
 
 1. Comando para se cadastrar:
 ```
@@ -67,6 +67,32 @@ curl --header "Authorization: Bearer JWT_token" --header "Content-Type: applicat
 ```
 
 * Atenção, lembrar de substituir o user_id na url
+
+## Funcionalidades de Visita
+
+6. criar visita:
+
+```
+curl --header "Authorization: Bearer JWT_token" --header "Content-Type: application/json" --request POST --data '{"visit": { "data": data_visita, "status": status_visita, "checkin_at": checkin_visita, "checkout_at": checkout_visita, "user_id": user_id_visita } }' http://localhost:3000/api/v1/visits -v
+```
+
+7. listar visita:
+
+```
+curl --header "Authorization: Bearer JWT_token" -X GET http://localhost:3000/api/v1/visits -v
+```
+
+8. editar visita:
+
+```
+curl --header "Authorization: Bearer JWT_token" --header "Content-Type: application/json" --request PUT --data '{"visit": { "data": nova_data "status": novo_status, "checkin_at": novo_checkin, "checkout_at": novo_checkout } }' http://localhost:3000/api/v1/visits/visit_id -v
+```
+
+9. remover visita
+
+```
+curl --header "Authorization: Bearer JWT_token" --header "Content-Type: application/json" --request DELETE http://localhost:3000/api/v1/visits/visit_id -v
+```
 
 
 
