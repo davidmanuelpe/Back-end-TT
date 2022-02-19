@@ -9,7 +9,21 @@ class Visit < ApplicationRecord
   validate :validar_checkin
   validate :validar_checkout
   validate :validar_user_id
+  validate :garantir_saida_status
 
+  def garantir_saida_status
+
+    if status?
+      array_possibilidades = ["pendente", "realizado", "realizando"]
+
+      if !array_possibilidades.include?(status.downcase)
+        errors.add(:status, "entrada de status inválida")
+      end 
+    end
+
+    
+  end
+  
 
   def validar_data_visita
     if data?

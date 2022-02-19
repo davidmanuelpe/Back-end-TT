@@ -154,6 +154,22 @@ end
       )
     end
 
+    it "não cria visita com status inválido" do
+      expect{
+        post '/api/v1/visits', params: 
+        { visit: 
+        { data: "2022-10-10", status: "PDLAKSE", checkin_at: "nil", checkout_at: "nil", user_id: user5.id }
+        }
+      }.to change { Visit.count}.by(0)
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response_body).to eq(
+        {
+          "status" => ["entrada de status inválida"]
+        }
+
+      )
+    end
+
     it "não cria visita com checkin maior que a data atual" do
       expect{
         post '/api/v1/visits', params: 
