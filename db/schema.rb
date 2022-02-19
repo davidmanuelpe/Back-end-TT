@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_19_104513) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_19_180253) do
+  create_table "formularies", force: :cascade do |t|
+    t.string "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_formularies_on_deleted_at"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "nome"
+    t.string "tipo_de_questao"
+    t.integer "formulary_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_questions_on_deleted_at"
+    t.index ["formulary_id"], name: "index_questions_on_formulary_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "nome"
     t.string "email"
@@ -35,5 +54,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_19_104513) do
     t.index ["user_id"], name: "index_visits_on_user_id"
   end
 
+  add_foreign_key "questions", "formularies"
   add_foreign_key "visits", "users"
 end

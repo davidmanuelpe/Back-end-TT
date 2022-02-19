@@ -9,7 +9,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] desenvolvimento da entidade Usuário (com testes)
 - [x] desenvolvimento da autenticação do usuário
 - [x] desenvolvimento da entidade Visitas
-- [ ] desenvolvimento da entidade Formulário
+- [x] desenvolvimento da entidade Formulário
 - [ ] desenvolvimento da entidade Pergunta
 - [ ] desenvolvimento da entidade Resposta
 
@@ -88,10 +88,36 @@ curl --header "Authorization: Bearer JWT_token" -X GET http://localhost:3000/api
 curl --header "Authorization: Bearer JWT_token" --header "Content-Type: application/json" --request PUT --data '{"visit": { "data": nova_data "status": novo_status, "checkin_at": novo_checkin, "checkout_at": novo_checkout } }' http://localhost:3000/api/v1/visits/visit_id -v
 ```
 
-9. remover visita
+9. remover visita?
 
 ```
 curl --header "Authorization: Bearer JWT_token" --header "Content-Type: application/json" --request DELETE http://localhost:3000/api/v1/visits/visit_id -v
+```
+
+## Funcionalidades de Formulário
+
+10. listar formulários:
+
+```
+curl --header "Authorization: Bearer JWT_token" --request GET http://localhost:3000/api/v1/formularies -v
+```
+
+11. criar formulário:
+
+```
+curl --header "Authorization: Bearer JWT_token" --header "Content-Type: application/json" --request POST --data '{ "formulary": { "nome": nome_formulario } }' http://localhost:3000/api/v1/formularies -v
+```
+
+12. editar formulário:
+
+```
+curl --header "Authorization: Bearer JWT_token" --header "Content-Type: application/json" --request PUT --data '{"formulary": {"nome": "novo_nome"} }' http://localhost:3000/api/v1/formularies/formulary_id -v
+```
+
+13. deletar formulário:
+
+```
+curl --header "Authorization: Bearer JWT_token" --header "Content-Type: application/json" --request DELETE http://localhost:3000/api/v1/formularies/ formulary_id -v
 ```
 
 
