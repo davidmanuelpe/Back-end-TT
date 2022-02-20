@@ -11,7 +11,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] desenvolvimento da entidade Visitas
 - [x] desenvolvimento da entidade Formulário
 - [x] desenvolvimento da entidade Pergunta
-- [ ] desenvolvimento da entidade Resposta
+- [x] desenvolvimento da entidade Resposta
 
 ## 💻 Pré-requisitos
 
@@ -30,7 +30,7 @@ Para usar Back-End-TT, siga estas etapas:
 
 1. Comando para se cadastrar:
 ```
-curl --header "Content-Type: application/json" POST --data '{"nome": "user_name", "password": "user_password", "email": "user_email", "cpf": "user_cpf"}' http://localhost:3000/users -v
+curl -d '{"user": { "nome": "nome_usuário", "email": "email_usuário", "password": "senha_usuário", "cpf": "cpf_usuário" } }' -H 'Content-Type: application/json' http://localhost:3000/api/v1/users -v
 ```
 * Atenção, substitua os valores escritos como user_xxxx por suas informações
 
@@ -139,13 +139,13 @@ curl --header "Authorization: Bearer JWT_token" --request GET http://localhost:3
 15. criar perguntas:
 
 ```
-curl --header "Authorization: Bearer JWT_toke" --header "Content-Type: application/json" --request POST --data '{ "question": { "nome": nome_pergunta, "tipo_de_questao": tipo_pergunta, "formulary_id": formulary_id } }' http://localhost:3000/api/v1/questions -v
+curl --header "Authorization: Bearer JWT_token" --header "Content-Type: application/json" --request POST --data '{ "question": { "nome": nome_pergunta, "tipo_de_questao": tipo_pergunta, "formulary_id": formulary_id } }' http://localhost:3000/api/v1/questions -v
 ```
 
 16. editar perguntas:
 
 ```
-curl --header "Authorization: Bearer token" --header "Content-Type: application/json" --request PUT --data '{"question": { "nome": nome_novo, "tipo_pergunta": tipo_novo } }' http://localhost:3000/api/v1/questions/ question_id -v
+curl --header "Authorization: Bearer JWT_token" --header "Content-Type: application/json" --request PUT --data '{"question": { "nome": nome_novo, "tipo_pergunta": tipo_novo } }' http://localhost:3000/api/v1/questions/ question_id -v
 ```
 
 * Atenção, lembrar de substituir o question_id na url
@@ -153,11 +153,40 @@ curl --header "Authorization: Bearer token" --header "Content-Type: application/
 17. deletar perguntas:
 
 ```
-curl --header "Authorization: Bearer token" --header "Content-Type: application/json" --request DELETE http://localhost:3000/api/v1/questions/ question_id -v
+curl --header "Authorization: Bearer JWT_token" --header "Content-Type: application/json" --request DELETE http://localhost:3000/api/v1/questions/ question_id -v
 ```
 
 * Atenção, lembrar de substituir o question_id na url
 
+## Funcionalidades de Respostas
+
+18. listar respostas:
+
+```
+curl --header "Authorization: Bearer JWT_token" --request GET http://localhost:3000/api/v1/answers -v
+```
+
+19. criar respostas:
+
+```
+curl --header "Authorization: Bearer token" --header "Content-Type: application/json" --request POST --data '{"answer": { "content": conteudo_resposta, "question_id": question_id, "formulary_id": formulary_id, "visit_id": visit_id } }' http://localhost:3000/api/v1/answers -v
+```
+
+20. editar respostas:
+
+```
+curl --header "Authorization: Bearer token" --header "Content-Type: application/json" --request PUT --data '{"answer": { "content": novo_conteudo } }' http://localhost:3000/api/v1/answers/answer_id -v
+```
+
+* Atenção, lembrar de substituir o answer_id na url
+
+21. deletar respostas:
+
+```
+curl --header "Authorization: Bearer token" --header "Content-Type: application/json" --request DELETE http://localhost:3000/api/v1/answers/ answer_id -v
+```
+
+* Atenção, lembrar de substituir o answer_id na url
 
 
 

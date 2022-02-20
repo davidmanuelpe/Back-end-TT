@@ -7,9 +7,9 @@ module Api
 
       # GET /answers
       def index
-        @answers = Answer.all
+        @answers = Answer.limit(limit).offset(params[:offset])
 
-        render json: @answers
+        render json: AnswersRepresenter.new(@answers).as_json
       end
 
       # GET /answers/1
@@ -19,19 +19,29 @@ module Api
 
       # POST /answers
       def create
-        @answer = Answer.new(answer_params)
+        if (answer_params[:question_id].nil?)
+          #Este if gera o erro de falta de question_id e formulary_id ao tentar o save e jogar para o model
+          #Já que o questão tem obrigatoriamente um formulário relacionado à ela, estou fornecendo à resposta este id
+          
+          @answer = Answer.new(answer_params.merge(answered_at: Date.today))
 
-        if @answer.save
-          render json: @answer, status: :created, location: @answer
         else
-          render json: @answer.errors, status: :unprocessable_entity
+          question = Question.find(answer_params[:question_id])
+          @answer = Answer.new(answer_params.merge(answered_at: Date.today, formulary_id: question.formulary.id))
+
         end
+
+          if @answer.save
+            render json: AnswerRepresenter.new(@answer).as_json, status: :created
+          else
+            render json: @answer.errors, status: :unprocessable_entity
+          end
       end
 
       # PATCH/PUT /answers/1
       def update
         if @answer.update(answer_params)
-          render json: @answer
+          render json: AnswerRepresenter.new(@answer).as_json, status: :accepted
         else
           render json: @answer.errors, status: :unprocessable_entity
         end
@@ -52,7 +62,7 @@ module Api
 
         # Only allow a list of trusted parameters through.
         def answer_params
-          params.require(:answer).permit(:content, :answered_at, :formulary_id, :question_id, :visit_id)
+          params.require(:answer).permit(:content, :question_id, :visit_id)
         end
     end
   end

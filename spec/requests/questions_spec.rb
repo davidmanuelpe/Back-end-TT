@@ -10,7 +10,7 @@ RSpec.describe "/questions", type: :request do
 
   let!(:form1) {FactoryBot.create(:formulary, nome:"pesquisa1")}
 
-  let!(:visit1) {FactoryBot.create(:visit, data: "2023-10-12", status: "pendente", checkin_at: "nil", checkout_at: "nil", user_id: user5.id)}
+  let!(:visit1) {FactoryBot.create(:visit, data: "2023-10-12", status: "realizando", checkin_at: "nil", checkout_at: "nil", user_id: user5.id)}
 
   let!(:pergunta1) {FactoryBot.create(:question, nome:"pergunta1", tipo_de_questao:"foto", formulary_id:form1.id)}
 
